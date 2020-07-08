@@ -1,10 +1,44 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import { StudentService } from './shared/services/student.service';
+import { ClassService } from './shared/services/class.service';
+import { Student } from './shared/models/student.model';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+
   title = 'nursery';
+  constructor(private studentService: StudentService,
+              private classService: ClassService) { }
+
+  ngOnInit(){
+    this.getStudents();
+    this.getClasses();
+  }
+
+  getStudents() {
+    this.studentService.getStudents().subscribe((students:Student[])=>{
+      console.log(students)
+    })
+  } 
+
+  getClasses(){
+    this.classService.getClasses().subscribe((c)=>{
+      console.log(c)
+    })
+  }
+
+  addStudent(){
+    this.studentService.addStudent({
+      name:'everton',
+      age: 3,
+      class: 'class',
+      photo: 'photo',
+      responsible: 'String' 
+     })
+  }
 }
