@@ -13,14 +13,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ClassesComponent } from './components/classes/classes.component';
 import { TeachersComponent } from './components/teachers/teachers.component';
 import { StudentsComponent } from './components/students/students.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    StudentComponent,
+    StudentsComponent,
     HomeComponent,
-    TeacherComponent,
-    ClassComponent,
+    TeachersComponent,
+    ClassesComponent,
     ClassesComponent,
     TeachersComponent,
     StudentsComponent

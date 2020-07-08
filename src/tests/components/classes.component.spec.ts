@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ClassesComponent } from './classes.component';
+import { ClassesComponent } from '../../app/components/classes/classes.component';
 
 describe('ClassesComponent', () => {
   let component: ClassesComponent;
