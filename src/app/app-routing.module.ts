@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuard } from './components/auth/auth.guard';
-import { HomeComponent } from './components/home/home.component';
-import { LoginComponent } from './components/login/login.component';
-import { StudentsComponent } from './components/students/students.component';
-import { ClassesComponent } from './components/classes/classes.component';
-import { TeachersComponent } from './components/teachers/teachers.component';
+import { HomeComponent } from './components/pages/home/home.component';
+import { LoginComponent } from './components/pages/login/login.component';
+import { StudentsComponent } from './components/pages/students/students.component';
+import { ClassesComponent } from './components/pages/classes/classes.component';
+import { TeachersComponent } from './components/pages/teachers/teachers.component';
 import { HomeLayoutComponent } from './components/layouts/home-layout.component';
 import { LoginLayoutComponent } from './components/layouts/login-layout.component';
 
