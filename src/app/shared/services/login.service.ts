@@ -19,9 +19,7 @@ export class LoginService {
   }
 
   login(email:string, password: string): Promise<any> {
-    return this.afs.signInWithEmailAndPassword(email, password).then((user) => {
-        console.log(user)
-    })
+    return this.afs.signInWithEmailAndPassword(email, password).then((user) => {})
   }
 
 

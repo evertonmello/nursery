@@ -1,4 +1,4 @@
-export class Class {
+export class SClass {
     id: string;
     name: string;
     ageRange: Array<Number>;

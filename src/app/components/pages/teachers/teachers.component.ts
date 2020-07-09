@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { Teacher } from './../../../shared/models/teacher.model';
 import { TeacherService } from './../../../shared/services/teacher.service';
 import { ClassService } from './../../../shared/services/class.service';
-import { Class } from '../../../shared/models/class.model';
+import { SClass } from '../../../shared/models/sclass.model';
 
 @Component({
   selector: 'app-teachers',
@@ -18,7 +18,8 @@ export class TeachersComponent implements OnInit  {
   public classes = [];
   public showForm = false;
   public add = false;
-  displayedColumns: string[] = ['name', 'classes'];
+  public loader = true;
+  public displayedColumns: string[] = ['name', 'classes'];
   teacherForm: FormGroup = new FormGroup({
     id: new FormControl(''),
     name: new FormControl(''),
@@ -39,12 +40,13 @@ XZ
   getTeacher(): void {
     this.teacherService.getTeachers().subscribe((teachers: Teacher[]) => {
       this.teachers = teachers;
+      this.loader = false;
     })
   }
 
 
   getClasses(){
-    this.classService.getClasses().subscribe((classes: Class[])=>{
+    this.classService.getClasses().subscribe((classes: SClass[])=>{
       classes.forEach(sClass => {
         this.classes.push({
           value: sClass.id,
@@ -72,6 +74,8 @@ XZ
 
   updateClass(): void {
     let teacher = this.teacherForm.value;
+    teacher.classes = new Array(this.teacherForm.value.classes_ids);
+
     this.teacherService.updateTeacher(teacher).subscribe(
       () => {
         this.teacherForm.reset();

@@ -14,7 +14,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ClassesComponent } from './components/pages/classes/classes.component';
 import { TeachersComponent } from './components/pages/teachers/teachers.component';
 import { StudentsComponent } from './components/pages/students/students.component';
-import { HomeComponent } from './components/pages/home/home.component';
 import { LoginComponent } from './components/pages/login/login.component';
 import { HomeLayoutComponent } from './components/layouts/home-layout.component';
 import { LoginLayoutComponent } from './components/layouts/login-layout.component';
@@ -25,7 +24,6 @@ import { AuthService } from './components/auth/auth.service';
   declarations: [
     AppComponent,
     StudentsComponent,
-    HomeComponent,
     TeachersComponent,
     ClassesComponent,
     ClassesComponent,

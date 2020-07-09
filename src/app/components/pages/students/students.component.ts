@@ -3,7 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { StudentService } from './../../../shared/services/student.service';
+import { ClassService } from './../../../shared/services/class.service';
 import { Student } from './../../../shared/models/student.model';
+import { SClass } from '../../../shared/models/sclass.model';
 
 @Component({
   selector: 'app-students',
@@ -13,13 +15,10 @@ import { Student } from './../../../shared/models/student.model';
 export class StudentsComponent implements OnInit {
 
   public students: Array<Student>;
+  public classes: Array<SClass>;
   public displayedColumns: string[] = ['name', 'age', 'photo', 'responsible', 'class'];
-  public foods = [
-    { value: 'steak-0', viewValue: 'Steak' },
-    { value: 'pizza-1', viewValue: 'Pizza' },
-    { value: 'tacos-2', viewValue: 'Tacos' }
-  ];
   public showForm = false;
+  public loader = true;
   public add = false;
   public studentForm: FormGroup = new FormGroup({
     id: new FormControl(''),
@@ -28,24 +27,35 @@ export class StudentsComponent implements OnInit {
     age: new FormControl(''),
     class: new FormControl(''),
   });
-  constructor(private studentService: StudentService) { }
+  constructor(
+    private studentService: StudentService,
+    private classService: ClassService
+    ) { }
 
   ngOnInit(): void {
     this.getStudents();
+    this.getClasses();
   }
 
   //get all students from server
   getStudents(): void {
     this.studentService.getStudents().subscribe((students: Student[]) => {
       this.students = students;
+      this.loader = false;
     })
   }
+
+  getClasses(){
+    this.classService.getClasses().subscribe((classes: SClass[])=>{
+      this.classes = classes;
+    })
+  }
+
 
   //call method to save: either update or add
   save(): void {
     this.add ? this.addStudent() : this.updateStudent();
   }
-
 
   addStudent(): void {
     this.studentService.addStudent(this.studentForm.value).subscribe(() => {

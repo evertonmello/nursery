@@ -1,5 +1,5 @@
 
-<div class="mainContainer" >
+<div *ngIf="!loader" class="mainContainer" >
     <div *ngIf="!showForm" class="mat-elevation-z8">
         <table mat-table [dataSource]="teachers" class="table" >
   
@@ -52,3 +52,4 @@
     <button *ngIf="showForm" (click)="save()" mat-raised-button color="primary" >Salvar</button>
     <button *ngIf="showForm" (click)="setFormView(false)" mat-raised-button color="primary" >Voltar</button>
   </div>  
+  <mat-spinner *ngIf="loader"></mat-spinner>

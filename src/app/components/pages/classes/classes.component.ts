@@ -3,7 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { ClassService } from './../../../shared/services/class.service';
-import { Class } from './../../../shared/models/class.model';
+import { TeacherService } from './../../../shared/services/teacher.service';
+import { SClass } from './../../../shared/models/sclass.model';
+import { Teacher } from '../../../shared/models/teacher.model';
 
 @Component({
   selector: 'app-classes',
@@ -12,15 +14,12 @@ import { Class } from './../../../shared/models/class.model';
 })
 export class ClassesComponent implements OnInit {
 
-  public classes: Array<Class>;
+  public classes: Array<SClass>;
+  public teachers: Array<Teacher>;
   public displayedColumns: string[] = ['name', 'ageRage', 'startTime', 'endTime', 'teacher'];
-  public foods = [
-    { value: 'steak-0', viewValue: 'Steak' },
-    { value: 'pizza-1', viewValue: 'Pizza' },
-    { value: 'tacos-2', viewValue: 'Tacos' }
-  ];
   public showForm = false;
   public add = false;
+  public loader = true;
   public classForm: FormGroup = new FormGroup({
     id:new FormControl(''),
     name: new FormControl(''),
@@ -30,16 +29,28 @@ export class ClassesComponent implements OnInit {
     endAge: new FormControl(''),
     teacher: new FormControl(''),
   });
-  constructor(private classService: ClassService) { }
+
+  constructor(
+    private classService: ClassService,
+    private teacherService:TeacherService
+    ) { }
 
   ngOnInit(): void {
     this.getClassses();
+    this.getTeachers();
   }
 
   //get all classes from server
   getClassses(): void {
-    this.classService.getClasses().subscribe((classes: Class[]) => {
+    this.classService.getClasses().subscribe((classes: SClass[]) => {
       this.classes = classes;
+      this.loader = false;
+    })
+  }
+
+  getTeachers(){
+    this.teacherService.getTeachers().subscribe((teachers:Teacher[])=>{
+      this.teachers = teachers;
     })
   }
 
@@ -71,12 +82,12 @@ export class ClassesComponent implements OnInit {
       (error) => { console.log(error) })
   }
 
-  deleteClass(student: Class): void {
+  deleteClass(student: SClass): void {
     this.classService.removeClass(student).subscribe(() => {
     }, (error) => { alert(error) });
   }
 
-  editClass(sClass: Class): void {
+  editClass(sClass: SClass): void {
     this.setFormView(false);
     this.classForm.patchValue({
       id: sClass.id,

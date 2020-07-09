@@ -1,7 +1,7 @@
-import { Class } from '../../app/shared/models/class.model';
+import { SClass } from '../../app/shared/models/sclass.model';
 
 describe('Class', () => {
   it('should create an instance', () => {
-    expect(new Class()).toBeTruthy();
+    expect(new SClass()).toBeTruthy();
   });
 });
