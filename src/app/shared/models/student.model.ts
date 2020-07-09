@@ -1,7 +1,8 @@
-export class Student {  
-    name:String;
+export class Student {
+    id:string;  
+    name:string;
     age: Number;
-    class: String;
-    photo: String;
-    responsible: String;  
+    class: string;
+    photo: string;
+    responsible: string; 
 }

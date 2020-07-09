@@ -30,13 +30,4 @@ export class AppComponent implements OnInit {
     })
   }
 
-  addStudent(){
-    this.studentService.addStudent({
-      name:'everton',
-      age: 3,
-      class: 'class',
-      photo: 'photo',
-      responsible: 'String' 
-     })
-  }
 }

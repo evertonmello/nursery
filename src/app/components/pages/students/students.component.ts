@@ -1,16 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FormBuilder, FormGroup,FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { StudentService } from './../../../shared/services/student.service';
-const ELEMENT_DATA = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-];
+import { Student } from './../../../shared/models/student.model';
 
 @Component({
   selector: 'app-students',
@@ -18,30 +11,80 @@ const ELEMENT_DATA = [
   styleUrls: ['./students.component.scss']
 })
 export class StudentsComponent implements OnInit {
-  dataSource = ELEMENT_DATA;
-  displayedColumns: string[] = ['name', 'ageRage', 'startTime', 'endTime', 'teacher'];
-  foods = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'}
+
+  public students: Array<Student>;
+  public displayedColumns: string[] = ['name', 'age', 'photo', 'responsible', 'class'];
+  public foods = [
+    { value: 'steak-0', viewValue: 'Steak' },
+    { value: 'pizza-1', viewValue: 'Pizza' },
+    { value: 'tacos-2', viewValue: 'Tacos' }
   ];
-  showForm = false;
-  studentForm: FormGroup = new FormGroup({
+  public showForm = false;
+  public add = false;
+  public studentForm: FormGroup = new FormGroup({
+    id: new FormControl(''),
     name: new FormControl(''),
     responsible: new FormControl(''),
     age: new FormControl(''),
+    class: new FormControl(''),
   });
-  constructor(private studentService:StudentService ) { }
+  constructor(private studentService: StudentService) { }
 
   ngOnInit(): void {
-    this.studentService.getStudents().subscribe((data)=>{
-      console.log(data)
+    this.getStudents();
+  }
+
+  //get all students from server
+  getStudents(): void {
+    this.studentService.getStudents().subscribe((students: Student[]) => {
+      this.students = students;
     })
   }
 
-  setFormView(){
-    this.showForm = !this.showForm;
+  //call method to save: either update or add
+  save(): void {
+    this.add ? this.addStudent() : this.updateStudent();
   }
-  
+
+
+  addStudent(): void {
+    this.studentService.addStudent(this.studentForm.value).subscribe(() => {
+      this.studentForm.reset();
+      this.setFormView(false);
+    }, (error) => { alert(error) });
+  }
+
+  updateStudent(): void {
+    this.studentService.updateStudent(this.studentForm.value).subscribe(
+      () => {
+        this.studentForm.reset();
+        this.setFormView(false)
+      },
+      (error) => { console.log(error) })
+  }
+
+  deleteStudent(student: Student): void {
+    this.studentService.removeStudent(student).subscribe(() => {
+    }, (error) => { alert(error) });
+  }
+
+  editStudent(student: Student): void {
+    this.setFormView(false);
+    console.log(student)
+    this.studentForm.patchValue({
+      id: student.id,
+      name: student.name,
+      age: student.age,
+      class: student.class,
+      responsible: student.responsible
+    });
+  }
+
+  //define if show the table or form - with parameter for add
+  setFormView(add: boolean): void {
+    this.showForm = !this.showForm;
+    this.add = add;
+  }
+
 
 }
