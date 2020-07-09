@@ -12,22 +12,9 @@ import { Student } from './shared/models/student.model';
 export class AppComponent implements OnInit {
 
   title = 'nursery';
-  constructor(private studentService: StudentService,
-              private classService: ClassService) { }
+  constructor() { }
 
   ngOnInit(){
-  }
-
-  getStudents() {
-    this.studentService.getStudents().subscribe((students:Student[])=>{
-      console.log(students)
-    })
-  } 
-
-  getClasses(){
-    this.classService.getClasses().subscribe((c)=>{
-      console.log(c)
-    })
   }
 
 }
