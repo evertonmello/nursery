@@ -25,10 +25,6 @@ export class ClassService {
     );
   }
 
-  addStudent(sClass: Class):Observable<any>{
-    return from(this.firestore.collection('classes').add(sClass));
-  }
-
   addClass(sClass: Class):Observable<any>{
     return from(this.firestore.collection('classes').add(sClass));
   }
