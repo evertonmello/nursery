@@ -70,7 +70,6 @@ export class StudentsComponent implements OnInit {
 
   editStudent(student: Student): void {
     this.setFormView(false);
-    console.log(student)
     this.studentForm.patchValue({
       id: student.id,
       name: student.name,
@@ -83,6 +82,7 @@ export class StudentsComponent implements OnInit {
   //define if show the table or form - with parameter for add
   setFormView(add: boolean): void {
     this.showForm = !this.showForm;
+    this.studentForm.reset();
     this.add = add;
   }
 

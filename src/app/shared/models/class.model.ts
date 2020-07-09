@@ -1,7 +1,8 @@
 export class Class {
-    name: String;
+    id: string;
+    name: string;
     ageRange: Array<Number>;
-    startTime: String;
-    endTime: String;
-    teacher: String;
+    startTime: string;
+    endTime: string;
+    teacher: string;
 }
