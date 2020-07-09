@@ -32,8 +32,8 @@
             <th mat-header-cell *matHeaderCellDef> Professor </th>
             <td mat-cell *matCellDef="let element"> 
                 {{element.symbol}} 
-              <mat-icon class="icon" inline="true">delete</mat-icon>
-              <mat-icon class="icon" inline="true">edit</mat-icon>
+              <mat-icon class="icon"  matTooltip="remover" inline="true">delete</mat-icon>
+              <mat-icon class="icon"  matTooltip="editar" inline="true">edit</mat-icon>
 
             </td>
           </ng-container>

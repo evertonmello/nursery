@@ -11,6 +11,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
     exports: [
@@ -23,7 +24,8 @@ import { MatIconModule } from '@angular/material/icon';
         MatPaginatorModule,
         MatTableModule,
         MatSelectModule,
-        MatIconModule
+        MatIconModule,
+        MatTooltipModule
     ]
 })
 export class MaterialModule {}
