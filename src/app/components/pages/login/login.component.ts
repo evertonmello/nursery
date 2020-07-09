@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
     username: new FormControl(''),
     password: new FormControl(''),
   });
+  error;
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -22,36 +23,26 @@ export class LoginComponent implements OnInit {
   ) {}
 
 
-  submit(){
-    this.authService.login(this.form.value);
-  }
-
   ngOnInit(): void {
 
-      
-  }
-  loginWithGoogle(){
-    this.loginService.googleSignin().then((user)=>{
-    },(error)=>{
-    })
   }
 
   login(){
-    this.loginService.login('pedro@asd.com','passasdasda123').then(
-      ()=>{
-        console.log('')
-      },(error)=>{
-        console.log(error)
-        
-      });
+   this.loginService.login(this.form.value.username,this.form.value.password).then(
+    ()=>{
+      this.authService.login(this.form.value)
+    },(error)=>{
+      this.error = error;
+    });
   }
 
   signUp(){
-    this.loginService.signUp("pedro@asd.com", "passasdasda123").then(
-      (success)=>{
-
+    this.loginService.signUp(this.form.value.username, this.form.value.password).then(
+      (data)=>{
+        this.authService.login(data.user)
       },(error)=>{
-        
+        console.log(error)
+        this.error = error;
       });
   }
 

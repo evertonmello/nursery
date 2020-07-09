@@ -16,8 +16,6 @@ export class AppComponent implements OnInit {
               private classService: ClassService) { }
 
   ngOnInit(){
-    this.getStudents();
-    this.getClasses();
   }
 
   getStudents() {

@@ -1,0 +1,27 @@
+.mainContainer{
+    text-align:center;
+    width: 800px;
+    margin: 10px auto 10px auto;
+}
+.table{
+    width: 100%;
+}
+th{
+    text-align: center !important;
+}
+
+button{
+    float: right;
+    margin: 10px 10px 0 0;
+}
+
+mat-form-field{
+    margin-right: 10px;
+}
+
+.icon{
+    cursor: pointer;
+    float: right;
+    width: 15px;
+    margin-left: 10px;
+}

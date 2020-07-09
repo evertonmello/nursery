@@ -1,1 +1,91 @@
-<p>classes works!</p>
+
+<div class="mainContainer" >
+  <div *ngIf="!showForm" class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" class="table" >
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Nome da Turma</th>
+            <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+            <button mat-cell>edit</button>
+          </ng-container>
+      
+          <!-- Name Column -->
+          <ng-container matColumnDef="ageRage">
+            <th mat-header-cell *matHeaderCellDef> Horário de Início </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+      
+          <!-- Weight Column -->
+          <ng-container matColumnDef="startTime">
+            <th mat-header-cell *matHeaderCellDef> Horário de Fim </th>
+            <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+          </ng-container>
+      
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="endTime">
+            <th mat-header-cell *matHeaderCellDef> Faixa Etária </th>
+            <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="teacher">
+            <th mat-header-cell *matHeaderCellDef> Professor </th>
+            <td mat-cell *matCellDef="let element"> 
+                {{element.symbol}} 
+              <mat-icon class="icon" inline="true">delete</mat-icon>
+              <mat-icon class="icon" inline="true">edit</mat-icon>
+
+            </td>
+          </ng-container>
+    
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+  </div>
+  <button *ngIf="!showForm" (click)="setFormView()" mat-raised-button color="primary" >Adicionar</button>
+
+  <!-- Form add, update -->
+  <form *ngIf="showForm" [formGroup]="studentForm">
+      <mat-form-field>
+          <input type="text" matInput placeholder="Nome da Turma" formControlName="name">
+      </mat-form-field>
+
+      <!-- start time -->
+      <mat-form-field class="example-margin">
+        <mat-label>Idade Mínima</mat-label>
+        <input matInput min="0" type="number" >
+      </mat-form-field>
+
+      <!-- end time -->
+      <mat-form-field class="example-margin">
+          <mat-label>Idade Máxima</mat-label>
+          <input matInput max="10" type="number" >
+      </mat-form-field>
+
+      <!-- age rage -->
+      <mat-form-field class="example-margin">
+          <mat-label>Idade Mínima</mat-label>
+          <input matInput min="0" type="number" >
+        </mat-form-field>
+      <mat-form-field class="example-margin">
+          <mat-label>Idade Máxima</mat-label>
+          <input matInput max="10" type="number" >
+      </mat-form-field>
+
+      <!-- teacher -->
+      <mat-form-field appearance="fill">
+          <mat-label>Professor</mat-label>
+          <mat-select>
+              <mat-option *ngFor="let food of foods" [value]="food.value">
+              {{food.viewValue}}
+              </mat-option>
+          </mat-select>
+      </mat-form-field>
+  </form>
+  <button *ngIf="showForm" (click)="setFormView()" mat-raised-button color="primary" >Salvar</button>
+  <button *ngIf="showForm" (click)="setFormView()" mat-raised-button color="primary" >Voltar</button>
+</div>
+
+

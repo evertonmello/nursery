@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { Observable,of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
-
+import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { auth } from 'firebase/app';
 
 @Injectable({
   providedIn: 'root'
@@ -26,13 +23,6 @@ export class LoginService {
         console.log(user)
     })
   }
-
-  async googleSignin() {
-    const provider = new auth.GoogleAuthProvider();
-    const credential = await this.afs.signInWithPopup(provider);
-    return credential.user;
-  }
-
 
 
   logOut() {
