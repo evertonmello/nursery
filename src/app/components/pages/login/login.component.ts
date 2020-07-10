@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FormBuilder, FormGroup,FormControl, Validators } from '@angular/forms';
+import { FormGroup,FormControl } from '@angular/forms';
 
 import { AuthService } from '../../auth/auth.service';
 import { LoginService } from './../../../shared/services/login.service'
@@ -17,7 +17,6 @@ export class LoginComponent implements OnInit {
   });
   error;
   constructor(
-    private fb: FormBuilder,
     private authService: AuthService,
     private loginService: LoginService
   ) {}

@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TeachersComponent } from '../../app/components/teachers/teachers.component';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+
+import { environment } from '../../environments/environment';
+import { TeachersComponent } from '../../app/components/pages/teachers/teachers.component';
 
 describe('TeachersComponent', () => {
   let component: TeachersComponent;
@@ -8,7 +12,11 @@ describe('TeachersComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TeachersComponent ]
+      declarations: [ TeachersComponent ],
+      imports: [
+        AngularFireModule.initializeApp(environment.firebaseConfig),
+        AngularFireDatabaseModule,
+      ]
     })
     .compileComponents();
   }));
