@@ -1,85 +1,89 @@
+<div *ngIf="!loader" class="mainContainer">
+  <h1>Alunos</h1>
 
-<div *ngIf="!loader" class="mainContainer" >
-    <div *ngIf="!showForm" class="mat-elevation-z8">
-        <table mat-table [dataSource]="students" class="table" >
-  
-            <!-- name Column -->
-            <ng-container matColumnDef="name">
-              <th mat-header-cell *matHeaderCellDef> Nome </th>
-              <td mat-cell *matCellDef="let student"> {{student.name}} </td>
-              <button mat-cell>edit</button>
-            </ng-container>
-        
-            <!-- age Column -->
-            <ng-container matColumnDef="age">
-              <th mat-header-cell *matHeaderCellDef> Idade </th>
-              <td mat-cell *matCellDef="let student"> {{student.age}} </td>
-            </ng-container>
-        
-            <!-- photo Column -->
-            <ng-container matColumnDef="photo">
-              <th mat-header-cell *matHeaderCellDef> Foto </th>
-              <td mat-cell *matCellDef="let student"> {{student.photo}} </td>
-            </ng-container>
-        
-            <!-- responsible Column -->
-            <ng-container matColumnDef="responsible">
-              <th mat-header-cell *matHeaderCellDef> Responsável </th>
-              <td mat-cell *matCellDef="let student"> {{student.responsible}} </td>
-            </ng-container>
-        
-            <!-- class column -->
-            <ng-container matColumnDef="class">
-              <th mat-header-cell *matHeaderCellDef> Turma </th>
-              <td mat-cell *matCellDef="let student"> 
-                <!-- bind of student and class name -->
-                  <span *ngFor="let class of classes">
-                    <span *ngIf="class.id == student.class">{{class.name}}</span>
-                  </span>
-                <mat-icon (click)="deleteStudent(student)" class="icon" matTooltip="remover" inline="true">delete</mat-icon>
-                <mat-icon (click)="editStudent(student)" class="icon" matTooltip="editar" inline="true">edit</mat-icon>
+  <div *ngIf="!showForm" class="mat-elevation-z8">
+    <table mat-table [dataSource]="students" class="table">
 
-              </td>
-            </ng-container>
-      
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      <!-- name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Nome </th>
+        <td mat-cell *matCellDef="let student"> {{student.name}} </td>
+        <button mat-cell>edit</button>
+      </ng-container>
 
-    </div>
-    <button *ngIf="!showForm" (click)="setFormView(true)" mat-raised-button color="primary" >Adicionar</button>
+      <!-- age Column -->
+      <ng-container matColumnDef="age">
+        <th mat-header-cell *matHeaderCellDef> Idade </th>
+        <td mat-cell *matCellDef="let student"> {{student.age}} </td>
+      </ng-container>
 
-    <!-- Form add, update -->
-    <form *ngIf="showForm" [formGroup]="studentForm">
-        <mat-form-field>
-            <input type="text" matInput placeholder="Nome" formControlName="name">
-        </mat-form-field>
+      <!-- photo Column -->
+      <ng-container matColumnDef="photo">
+        <th mat-header-cell *matHeaderCellDef> Foto </th>
+        <td mat-cell *matCellDef="let student"> {{student.photo}} </td>
+      </ng-container>
 
-        <!-- age -->
-        <mat-form-field class="example-margin">
-            <mat-label>Idade</mat-label>
-            <input matInput min="0" max="10" type="number" formControlName="age" >
-        </mat-form-field>
+      <!-- responsible Column -->
+      <ng-container matColumnDef="responsible">
+        <th mat-header-cell *matHeaderCellDef> Responsável </th>
+        <td mat-cell *matCellDef="let student"> {{student.responsible}} </td>
+      </ng-container>
 
-        <!-- responsible -->
-        <mat-form-field>
-            <input type="text" matInput placeholder="Responsável" formControlName="responsible">
-        </mat-form-field>
+      <!-- class column -->
+      <ng-container matColumnDef="class">
+        <th mat-header-cell *matHeaderCellDef> Turma </th>
+        <td mat-cell *matCellDef="let student">
+          <!-- bind of student and class name -->
+          <span *ngFor="let class of classes">
+            <span *ngIf="class.id == student.class">{{class.name}}</span>
+          </span>
+          <mat-icon (click)="deleteStudent(student)" class="icon" matTooltip="remover" inline="true">delete</mat-icon>
+          <mat-icon (click)="editStudent(student)" class="icon" matTooltip="editar" inline="true">edit</mat-icon>
+
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+  </div>
+  <button *ngIf="!showForm" (click)="setFormView(true)" mat-raised-button color="primary">Adicionar</button>
+
+  <!-- Form add, update -->
+  <div *ngIf="showForm">
+    <form [formGroup]="studentForm">
+      <mat-form-field>
+        <input type="text" matInput placeholder="Nome" formControlName="name">
+      </mat-form-field>
+
+      <!-- age -->
+      <mat-form-field class="example-margin">
+        <mat-label>Idade</mat-label>
+        <input matInput min="0" max="10" type="number" formControlName="age">
+      </mat-form-field>
+
+      <!-- responsible -->
+      <mat-form-field>
+        <input type="text" matInput placeholder="Responsável" formControlName="responsible">
+      </mat-form-field>
 
 
-        <!-- class -->
-        <mat-form-field appearance="fill">
-            <mat-label>Turma</mat-label>
-            <mat-select formControlName="class">
-                <mat-option *ngFor="let class of classes" [value]="class.id">
-                {{class.name}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
+      <!-- class -->
+      <mat-form-field appearance="fill">
+        <mat-label>Turma</mat-label>
+        <mat-select formControlName="class">
+          <mat-option *ngFor="let class of classes" [value]="class.id">
+            {{class.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </form>
-    <button *ngIf="showForm" (click)="save()" mat-raised-button color="primary" >Salvar</button>
-    <button *ngIf="showForm" (click)="setFormView(false)" mat-raised-button color="primary" >Voltar</button>
+    <button (click)="save()" mat-raised-button color="primary">Salvar</button>
+    <button (click)="setFormView(false)" mat-raised-button color="primary">Voltar</button>
+
+  </div>
+
 </div>
 <mat-spinner *ngIf="loader"></mat-spinner>
-

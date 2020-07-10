@@ -25,7 +25,6 @@ export class TeachersComponent implements OnInit  {
     name: new FormControl(''),
     classes_ids: new FormControl(''),
   });
-XZ
   constructor(
     private teacherService:TeacherService,
     private classService:ClassService
@@ -43,7 +42,6 @@ XZ
       this.loader = false;
     })
   }
-
 
   getClasses(){
     this.classService.getClasses().subscribe((classes: SClass[])=>{

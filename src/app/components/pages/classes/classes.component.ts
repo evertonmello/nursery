@@ -36,12 +36,12 @@ export class ClassesComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.getClassses();
+    this.getClasses();
     this.getTeachers();
   }
 
   //get all classes from server
-  getClassses(): void {
+  getClasses(): void {
     this.classService.getClasses().subscribe((classes: SClass[]) => {
       this.classes = classes;
       this.loader = false;

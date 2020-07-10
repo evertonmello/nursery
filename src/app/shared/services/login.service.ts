@@ -22,9 +22,4 @@ export class LoginService {
     return this.afs.signInWithEmailAndPassword(email, password).then((user) => {})
   }
 
-
-  logOut() {
-    this.afs.signOut();
-  }
-  
 }
